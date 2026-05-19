@@ -137,34 +137,33 @@
 
   /* Tombol toggle dark mode */
   .toggle-icon {
-    width: 44px;
-    height: 44px;
-    border: 2px solid currentColor;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: var(--transition-default);
-    background: transparent;
-    flex-shrink: 0;
-    /* tambahan shadow untuk kontras */
-    filter: drop-shadow(0 1px 2px rgba(255,255,255,0.5));
-  }
-  body.dark-mode .toggle-icon {
-    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5));
-  }
-  .toggle-icon::before {
-    content: '';
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    background-color: currentColor;
-    transition: transform 0.3s ease;
-  }
-  body.dark-mode .toggle-icon::before {
-    transform: scale(0.5);
-  }
+  width: 44px;
+  height: 44px;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition-default);
+  background: rgba(128, 128, 128, 0.15); /* latar tipis agar terlihat */
+  flex-shrink: 0;
+}
+body.dark-mode .toggle-icon {
+  background: rgba(255, 255, 255, 0.15);
+}
+.toggle-icon::before {
+  content: '';
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: currentColor;
+  transition: transform 0.3s ease;
+}
+body.dark-mode .toggle-icon::before {
+  transform: scale(0.5);
+}
+/* Hapus filter drop-shadow yang tidak membantu */
   /* Outline fokus untuk aksesibilitas */
   .toggle-icon:focus-visible,
   a:focus-visible {
