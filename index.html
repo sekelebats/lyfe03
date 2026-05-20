@@ -1,446 +1,535 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="description" content="Galeri visual betterlyfe - kumpulan foto alam dan kota dengan gaya glassmorphism.">
-<title>betterlyfe — Galeri Visual</title>
-<!-- Open Graph / Sosial Media -->
-<meta property="og:title" content="betterlyfe — Galeri Visual">
-<meta property="og:description" content="Nikmati galeri foto dengan desain glassmorphism yang elegan.">
-<meta property="og:type" content="website">
-<meta property="og:image" content="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&h=630&fit=crop">
-<meta property="og:url" content="https://betterlyfe.example.com">
-<link rel="icon" href="https://sekelabs.netlify.app/images/favicon.png">
-<style>
-  /* ========== VARIABEL CSS GLOBAL ========== */
-  :root {
-    --bg-light: #ffffff;
-    --text-light: #000000;
-    --bg-dark: #000000;
-    --text-dark: #ffffff;
-    --navbar-bg-light: rgba(255, 255, 255, 0.08);
-    --navbar-bg-dark: rgba(0, 0, 0, 0.08);
-    --border-light: rgba(0, 0, 0, 0.08);
-    --border-dark: rgba(255, 255, 255, 0.15);
-    --blur-amount: blur(12px) saturate(180%);
-    --transition-default: all 0.3s ease;
-    --radius-card: 6px;
-    --radius-card-mobile: 4px;
-    --space-xs: 0.25rem;   /* 4px */
-    --space-sm: 0.5rem;    /* 8px */
-    --space-md: 0.75rem;   /* 12px */
-    --space-lg: 1rem;      /* 16px */
-    --space-xl: 1.5rem;    /* 24px */
-    --space-2xl: 2rem;     /* 32px */
-    --font-xs: 0.7rem;     /* 11.2px */
-    --font-sm: 0.8rem;     /* 12.8px */
-    --font-base: 1rem;     /* 16px */
-    --font-lg: 1.2rem;     /* 19.2px */
-    --font-xl: 1.5rem;     /* 24px */
-  }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>minimal blog — plex mono writer</title>
+    <!-- IBM Plex Mono: clean, monospaced, characterful -->
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  *,
-  *::before,
-  *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
+        body {
+            background: #f2efe7;   /* softly worn paper */
+            font-family: 'IBM Plex Mono', 'Courier New', monospace;
+            color: #1e1e1c;
+            line-height: 1.5;
+            padding: 2rem 1.5rem;
+        }
 
-  /* Reset tambahan */
-  body, h1, h2, h3, p, ul, ol, figure, blockquote {
-    margin: 0;
-    padding: 0;
-  }
+        /* main container — narrow, crisp, airy */
+        .container {
+            max-width: 880px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 28px;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.03), 0 0 0 1px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            padding: 2rem 2rem 2.5rem 2rem;
+            transition: all 0.2s ease;
+        }
 
-  html {
-    font-size: 100%; /* 16px */
-  }
-  @media (prefers-reduced-motion: no-preference) {
-    html {
-      scroll-behavior: smooth;
-    }
-  }
+        /* header area */
+        .top-header {
+            margin-bottom: 2.2rem;
+            border-bottom: 2px solid #eae6df;
+            padding-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+        h1 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #2d2a24, #5e5a52);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        .sub {
+            font-size: 0.75rem;
+            color: #8f8b82;
+            margin-top: 0.2rem;
+            letter-spacing: -0.2px;
+        }
+        .clear-all-btn {
+            background: transparent;
+            border: 1px solid #e0dbd1;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            padding: 0.4rem 1rem;
+            border-radius: 40px;
+            color: #6b645a;
+            cursor: pointer;
+            transition: 0.2s;
+            font-weight: 500;
+        }
+        .clear-all-btn:hover {
+            background: #f9f7f3;
+            border-color: #cbc3b7;
+            color: #2c2823;
+        }
 
-  body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    line-height: 1.5;
-    min-height: 100vh;
-    background-color: var(--bg-light);
-    color: var(--text-light);
-    transition: var(--transition-default);
-    padding-top: 90px;   /* ruang fixed header */
-    padding-bottom: 90px; /* ruang fixed footer */
-  }
+        /* form card — minimal but tactile */
+        .write-section {
+            background: #fefcf9;
+            border-radius: 24px;
+            padding: 1.5rem;
+            margin-bottom: 2.5rem;
+            border: 1px solid #ede9e2;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+        }
+        .form-group {
+            margin-bottom: 1.4rem;
+        }
+        label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            color: #7b766c;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        input, textarea {
+            width: 100%;
+            font-family: 'IBM Plex Mono', monospace;
+            background: #ffffff;
+            border: 1px solid #e2dbd0;
+            border-radius: 20px;
+            padding: 0.85rem 1.2rem;
+            font-size: 0.9rem;
+            transition: 0.2s;
+            color: #1e1e1c;
+            resize: vertical;
+        }
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #b9aea0;
+            box-shadow: 0 0 0 3px rgba(185, 174, 160, 0.2);
+        }
+        textarea {
+            min-height: 130px;
+        }
+        .btn-primary {
+            background: #1e1e1c;
+            border: none;
+            font-family: 'IBM Plex Mono', monospace;
+            font-weight: 500;
+            padding: 0.85rem 1.6rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: 100%;
+            letter-spacing: -0.2px;
+        }
+        .btn-primary:hover {
+            background: #3c3832;
+            transform: translateY(-1px);
+        }
+        .btn-primary:active {
+            transform: translateY(1px);
+        }
 
-  body.dark-mode {
-    background-color: var(--bg-dark);
-    color: var(--text-dark);
-  }
+        /* posts header with counter */
+        .posts-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 1.25rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .posts-header h2 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: -0.3px;
+        }
+        .post-count {
+            font-size: 0.7rem;
+            background: #f0ede8;
+            padding: 0.2rem 0.7rem;
+            border-radius: 30px;
+            color: #5b554b;
+        }
 
-  /* ========== FLOATING HEADER (glassmorphism) ========== */
-  .floating-header {
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: calc(100% - 40px);
-    max-width: 750px;
-    z-index: 1000;
-    background: var(--navbar-bg-light);
-    backdrop-filter: var(--blur-amount);
-    -webkit-backdrop-filter: var(--blur-amount);
-    border: 1px solid var(--border-light);
-    border-radius: 50px;
-    padding: var(--space-md) var(--space-xl);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    transition: var(--transition-default);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
-  }
-  body.dark-mode .floating-header {
-    background: var(--navbar-bg-dark);
-    border-color: var(--border-dark);
-    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
-  }
+        /* blog feed — minimal cards */
+        .blog-feed {
+            display: flex;
+            flex-direction: column;
+            gap: 1.3rem;
+        }
+        .blog-card {
+            background: #ffffff;
+            border: 1px solid #eee9e2;
+            border-radius: 24px;
+            padding: 1.4rem 1.5rem;
+            transition: all 0.15s;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.01);
+        }
+        .blog-card:hover {
+            border-color: #dad2c6;
+            background: #fefdfb;
+        }
+        .blog-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.3px;
+            word-break: break-word;
+            color: #2b2925;
+        }
+        .blog-content {
+            font-size: 0.85rem;
+            color: #49453e;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+        .blog-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 0.5rem;
+            border-top: 1px dashed #ece6de;
+            padding-top: 0.8rem;
+            font-size: 0.7rem;
+        }
+        .timestamp {
+            color: #a69f94;
+            letter-spacing: -0.2px;
+        }
+        .delete-btn {
+            background: none;
+            border: none;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.7rem;
+            color: #bdaca0;
+            cursor: pointer;
+            padding: 0.2rem 0.8rem;
+            border-radius: 40px;
+            transition: all 0.15s;
+            font-weight: 500;
+        }
+        .delete-btn:hover {
+            color: #db4d3f;
+            background: #fff3f0;
+        }
 
-  /* Text shadow untuk kontras (tanpa mengubah background) */
-  .floating-header,
-  .floating-header * {
-    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.6);
-  }
-  body.dark-mode .floating-header,
-  body.dark-mode .floating-header * {
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
-  }
+        /* empty state */
+        .empty-message {
+            text-align: center;
+            padding: 2.5rem 1rem;
+            color: #bbb2a6;
+            font-size: 0.85rem;
+            border: 1px dashed #e7e1d8;
+            border-radius: 32px;
+            background: #fefcf9;
+        }
 
-  .typing-container {
-    font-size: var(--font-xl);
-    font-weight: 300;
-    white-space: nowrap;
-    overflow: hidden;
-    border-right: 2px solid currentColor;
-  }
-  .cursor {
-    display: inline-block;
-    width: 2px;
-    background-color: currentColor;
-    animation: blink 0.7s infinite;
-    margin-left: 2px;
-  }
-  @keyframes blink {
-    0%, 100% { opacity: 0; }
-    50% { opacity: 1; }
-  }
+        hr {
+            margin: 1.5rem 0 0.5rem;
+            border: none;
+            border-top: 1px solid #f0ebe4;
+        }
 
-  /* Tombol toggle dark mode */
-  .toggle-icon {
-  width: 44px;
-  height: 44px;
-  border: 2px solid currentColor;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: var(--transition-default);
-  background: rgba(128, 128, 128, 0.15); /* latar tipis agar terlihat */
-  flex-shrink: 0;
-}
-body.dark-mode .toggle-icon {
-  background: rgba(255, 255, 255, 0.15);
-}
-.toggle-icon::before {
-  content: '';
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background-color: currentColor;
-  transition: transform 0.3s ease;
-}
-body.dark-mode .toggle-icon::before {
-  transform: scale(0.5);
-}
-/* Hapus filter drop-shadow yang tidak membantu */
-  /* Outline fokus untuk aksesibilitas */
-  .toggle-icon:focus-visible,
-  a:focus-visible {
-    outline: 2px solid currentColor;
-    outline-offset: 2px;
-  }
+        footer {
+            margin-top: 2rem;
+            font-size: 0.65rem;
+            text-align: center;
+            color: #bfb7ac;
+            letter-spacing: -0.2px;
+        }
 
-  /* ========== GALLERY MASONRY ========== */
-  main.gallery {
-    width: 100%;
-    max-width: 1400px;
-    margin: var(--space-2xl) auto 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: var(--space-xl);
-    padding: 0 var(--space-lg) var(--space-xl) var(--space-lg);
-  }
-
-  .photo-card {
-    background: transparent;
-    transition: transform 0.2s ease;
-  }
-  .photo-card:hover {
-    transform: translateY(-4px);
-  }
-
-  .photo-frame {
-    width: 100%;
-    overflow: hidden;
-    border-radius: var(--radius-card);
-    background-color: #f0f0f0;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  }
-  body.dark-mode .photo-frame {
-    background-color: #1a1a1a;
-  }
-
-  .photo-frame img {
-    width: 100%;
-    height: auto;      /* rasio asli, masonry */
-    display: block;
-    transition: transform 0.4s ease, filter 0.3s ease;
-  }
-  .photo-card:hover .photo-frame img {
-    transform: scale(1.02);
-    filter: brightness(1.02);
-  }
-
-  .photo-info {
-    padding: var(--space-md) var(--space-sm) var(--space-xs) var(--space-sm);
-  }
-  .photo-date {
-    font-size: var(--font-xs);
-    color: #888;
-    letter-spacing: 0.5px;
-    margin-bottom: var(--space-xs);
-  }
-  body.dark-mode .photo-date {
-    color: #aaa;
-  }
-  .photo-caption {
-    font-size: var(--font-sm);
-    font-weight: 500;
-    line-height: 1.3;
-    color: #222;
-  }
-  body.dark-mode .photo-caption {
-    color: #eee;
-  }
-
-  /* ========== FLOATING FOOTER (glassmorphism, fixed bottom) ========== */
-  .floating-footer {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: auto;
-    max-width: 90%;
-    z-index: 1000;
-    background: var(--navbar-bg-light);
-    backdrop-filter: var(--blur-amount);
-    -webkit-backdrop-filter: var(--blur-amount);
-    border: 1px solid var(--border-light);
-    border-radius: 50px;
-    padding: var(--space-sm) var(--space-xl);
-    text-align: center;
-    font-size: var(--font-sm);
-    color: #333;
-    transition: var(--transition-default);
-    white-space: nowrap;
-  }
-  body.dark-mode .floating-footer {
-    background: var(--navbar-bg-dark);
-    border-color: var(--border-dark);
-    color: #ccc;
-  }
-  /* text shadow untuk footer juga */
-  .floating-footer {
-    text-shadow: 0 1px 2px rgba(255,255,255,0.5);
-  }
-  body.dark-mode .floating-footer {
-    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
-  }
-
-  /* ========== RESPONSIVE ========== */
-  @media (max-width: 640px) {
-    body {
-      padding-top: 75px;
-      padding-bottom: 80px;
-    }
-    .floating-header {
-      width: calc(100% - 20px);
-      padding: var(--space-sm) var(--space-lg);
-    }
-    .typing-container {
-      font-size: var(--font-lg);
-    }
-    .toggle-icon {
-      width: 38px;
-      height: 38px;
-    }
-    .toggle-icon::before {
-      width: 18px;
-      height: 18px;
-    }
-    .gallery {
-      margin-top: var(--space-xl);
-      gap: var(--space-lg);
-      padding: 0 var(--space-md) var(--space-lg) var(--space-md);
-    }
-    .photo-frame {
-      border-radius: var(--radius-card-mobile);
-    }
-    .floating-footer {
-      padding: var(--space-xs) var(--space-lg);
-      font-size: var(--font-xs);
-      white-space: nowrap;
-    }
-  }
-  @media (max-width: 480px) {
-    .floating-footer {
-      white-space: normal;
-    }
-  }
-
-  /* Visually hidden untuk heading aksesibilitas */
-  .visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0,0,0,0);
-    border: 0;
-  }
-</style>
+        @media (max-width: 580px) {
+            body {
+                padding: 1rem;
+            }
+            .container {
+                padding: 1.5rem;
+            }
+            .write-section {
+                padding: 1rem;
+            }
+            .blog-card {
+                padding: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
+<div class="container">
+    <div class="top-header">
+        <div>
+            <h1>⎯ ⎯ WRITE BLOG ⎯</h1>
+            <div class="sub">IBM Plex Mono · minimal archive</div>
+        </div>
+        <button class="clear-all-btn" id="clearAllBtn" aria-label="delete all posts">clear all posts</button>
+    </div>
 
-<header class="floating-header">
-  <div class="typing-container" id="typingText"></div>
-  <button class="toggle-icon" id="darkToggle" aria-label="Mode gelap/terang"></button>
-</header>
+    <!-- writing zone -->
+    <div class="write-section">
+        <div class="form-group">
+            <label>✍️ TITLE</label>
+            <input type="text" id="blogTitle" placeholder="e.g., morning rituals, monospace dreams" autocomplete="off">
+        </div>
+        <div class="form-group">
+            <label>📝 CONTENT</label>
+            <textarea id="blogContent" placeholder="write freely, save locally …"></textarea>
+        </div>
+        <button class="btn-primary" id="publishBtn">+ PUBLISH ENTRY</button>
+    </div>
 
-<main class="gallery" id="galleryContainer">
-  <!-- Konten galeri diisi JS -->
-</main>
-
-<footer class="floating-footer">
-  © betterlyfe | 2026
-</footer>
+    <!-- blog list header + dynamic feed -->
+    <div class="posts-header">
+        <h2>✦ written notes</h2>
+        <span class="post-count" id="postCount">0 posts</span>
+    </div>
+    <div id="blogFeedContainer" class="blog-feed">
+        <!-- dynamic posts injected here -->
+    </div>
+    <hr />
+    <footer>local storage · everything stays in your browser</footer>
+</div>
 
 <script>
-  "use strict";
+    (function() {
+        // ---------- DOM elements ----------
+        const titleInput = document.getElementById('blogTitle');
+        const contentInput = document.getElementById('blogContent');
+        const publishBtn = document.getElementById('publishBtn');
+        const feedContainer = document.getElementById('blogFeedContainer');
+        const postCountSpan = document.getElementById('postCount');
+        const clearAllBtn = document.getElementById('clearAllBtn');
 
-  (function() {
-    // ========== TYPING EFFECT ==========
-    const words = ["Visual", "Nature", "Earth", "betterlyfe"];
-    const typingEl = document.getElementById("typingText");
-    let wordIdx = 0, charIdx = 0, isDeleting = false;
+        // storage key
+        const STORAGE_KEY = 'minimal_blog_plex';
 
-    function typeEffect() {
-      const current = words[wordIdx];
-      if (isDeleting) {
-        typingEl.textContent = current.substring(0, charIdx - 1);
-        charIdx--;
-      } else {
-        typingEl.textContent = current.substring(0, charIdx + 1);
-        charIdx++;
-      }
-      if (!isDeleting && charIdx === current.length) {
-        isDeleting = true;
-        setTimeout(typeEffect, 1000);
-        return;
-      }
-      if (isDeleting && charIdx === 0) {
-        isDeleting = false;
-        wordIdx = (wordIdx + 1) % words.length;
-        setTimeout(typeEffect, 200);
-        return;
-      }
-      const speed = isDeleting ? 50 : 120;
-      setTimeout(typeEffect, speed);
-    }
+        // ---------- blog posts array ----------
+        let posts = [];
 
-    // ========== DARK MODE ==========
-    const darkToggle = document.getElementById("darkToggle");
-    darkToggle.addEventListener("click", () => {
-      document.body.classList.toggle("dark-mode");
-    });
+        // ---------- helper: save to localStorage ----------
+        function persistPosts() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
+        }
 
-    // ========== DATA FOTO (dengan alt singkat) ==========
-    const photoSet = [
-      { url: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600", alt: "Puncak gunung berkabut", caption: "Puncak kabut pagi", date: "12 Mar 2026" },
-      { url: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=600", alt: "Hutan pinus lebat", caption: "Hutan pinus sunyi", date: "05 Apr 2026" },
-      { url: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=600", alt: "Lembah hijau berkabut", caption: "Lembah berkabut", date: "20 Feb 2026" },
-      { url: "https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=600", alt: "Aliran sungai di hutan", caption: "Aliran sungai jernih", date: "01 Mar 2026" },
-      { url: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600", alt: "Sinar matahari tembus pepohonan", caption: "Sinar matahari senja", date: "18 Jan 2026" },
-      { url: "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=600", alt: "Grand Canyon megah", caption: "Grand Canyon senja", date: "25 Mei 2026" },
-      { url: "https://images.unsplash.com/photo-1464822759023-6222f272c3e6?w=600", alt: "Danau biru pegunungan", caption: "Danau alpine biru", date: "09 Jun 2026" },
-      { url: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600", alt: "Pantai tropis dengan pasir putih", caption: "Pantai tropis", date: "14 Jul 2026" },
-      { url: "https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=600", alt: "Kaktus besar di gurun", caption: "Kaktus gurun mekar", date: "03 Agu 2026" },
-      { url: "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=600", alt: "Taman tradisional Jepang", caption: "Taman Jepang", date: "22 Sep 2026" },
-      { url: "https://images.unsplash.com/photo-1532274402911-5a369e4c4bb5?w=600", alt: "Air terjun yang deras", caption: "Air terjun tersembunyi", date: "11 Okt 2026" },
-      { url: "https://images.unsplash.com/photo-1509316975850-ff9c5deb3cd9?w=600", alt: "Cahaya aurora di malam hari", caption: "Aurora borealis", date: "30 Nov 2026" },
-      { url: "https://images.unsplash.com/photo-1418065460487-3e41a6c84dc5?w=600", alt: "Langit malam penuh bintang", caption: "Langit malam berbintang", date: "17 Des 2026" },
-      { url: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=600", alt: "Perahu kecil di danau tenang", caption: "Perahu di danau", date: "24 Jan 2026" },
-      { url: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=600", alt: "Padang rumput yang luas", caption: "Padang rumput hijau", date: "08 Feb 2026" },
-      { url: "https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?w=600", alt: "Kincir angin modern di bukit", caption: "Kincir angin modern", date: "19 Mar 2026" },
-      { url: "https://images.unsplash.com/photo-1518495973542-4542c06a5843?w=600", alt: "Pegunungan bersalju", caption: "Salju di pegunungan", date: "02 Apr 2026" },
-      { url: "https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?w=600", alt: "Daun-daun musim gugur", caption: "Musim gugur emas", date: "15 Mei 2026" },
-      { url: "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=600", alt: "Jembatan Golden Gate", caption: "Jembatan emas", date: "27 Jun 2026" },
-      { url: "https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d?w=600", alt: "Pemandangan kota malam", caption: "Gemerlap kota", date: "09 Jul 2026" }
-    ];
-    // Duplikasi sedikit agar lebih panjang (masonry terlihat)
-    const allPhotos = [...photoSet, ...photoSet.slice(0, 6)];
+        // ---------- load from localStorage or init with 2 demo posts ----------
+        function loadPostsFromStorage() {
+            const stored = localStorage.getItem(STORAGE_KEY);
+            if (stored) {
+                try {
+                    const parsed = JSON.parse(stored);
+                    if (Array.isArray(parsed)) {
+                        posts = parsed;
+                        return;
+                    }
+                } catch(e) { console.warn(e); }
+            }
+            // if empty / invalid: create gentle demo posts (minimal, relevant)
+            const now = new Date();
+            const demoPosts = [
+                {
+                    id: 'demo1_' + Date.now() + '_1',
+                    title: 'welcome to minimal blog',
+                    content: 'this is a space for raw thoughts. write anything — drafts, poetry, daily logs.\n\nall entries are saved to your browser. no cloud, no clutter.',
+                    timestamp: now.toLocaleString(),
+                },
+                {
+                    id: 'demo2_' + Date.now() + '_2',
+                    title: 'ibm plex mono :: the charm of monospace',
+                    content: 'a monospace writer keeps you focused. every character matters. use this tool to collect fragments, notes, or entire essays.\n\ndelete or add as you like.',
+                    timestamp: new Date(now.getTime() - 86400000).toLocaleString(), // yesterday vibe
+                }
+            ];
+            posts = demoPosts;
+            persistPosts();
+        }
 
-    const galleryContainer = document.getElementById("galleryContainer");
-
-    function buildGallery() {
-      galleryContainer.innerHTML = "";
-      allPhotos.forEach((photo) => {
-        const card = document.createElement("article");
-        card.className = "photo-card";
-
-        const frame = document.createElement("div");
-        frame.className = "photo-frame";
-        const img = document.createElement("img");
-        img.src = photo.url;
-        img.alt = photo.alt;      // alt singkat sesuai aturan
-        img.loading = "lazy";
-        frame.appendChild(img);
-
-        const info = document.createElement("div");
-        info.className = "photo-info";
-        const dateSpan = document.createElement("div");
-        dateSpan.className = "photo-date";
-        dateSpan.textContent = photo.date;
-        const captionSpan = document.createElement("div");
-        captionSpan.className = "photo-caption";
-        captionSpan.textContent = photo.caption;
-
-        info.appendChild(dateSpan);
-        info.appendChild(captionSpan);
-        card.appendChild(frame);
-        card.appendChild(info);
-        galleryContainer.appendChild(card);
-      });
-    }
-
-    // Inisialisasi setelah DOM siap
-    document.addEventListener("DOMContentLoaded", () => {
-      typeEffect();
-      buildGallery();
-    });
-  })();
+        // ---------- render all blog posts (safe, no innerHTML injection) ----------
+        function renderFeed() {
+            if (!feedContainer) return;
+            // clear container
+            feedContainer.innerHTML = '';
+            
+            if (!posts.length) {
+                const emptyDiv = document.createElement('div');
+                emptyDiv.className = 'empty-message';
+                emptyDiv.textContent = '✧ no entries yet · write your first blog above ✧';
+                feedContainer.appendChild(emptyDiv);
+                postCountSpan.textContent = '0 posts';
+                return;
+            }
+            
+            // update post count
+            postCountSpan.textContent = `${posts.length} ${posts.length === 1 ? 'post' : 'posts'}`;
+            
+            // loop & build each card (safe DOM methods)
+            for (let i = 0; i < posts.length; i++) {
+                const post = posts[i];
+                const card = document.createElement('article');
+                card.className = 'blog-card';
+                
+                // title
+                const titleEl = document.createElement('h3');
+                titleEl.className = 'blog-title';
+                titleEl.textContent = post.title && post.title.trim() !== '' ? post.title : '[untitled]';
+                
+                // content
+                const contentEl = document.createElement('div');
+                contentEl.className = 'blog-content';
+                contentEl.textContent = post.content && post.content.trim() !== '' ? post.content : '(empty entry)';
+                
+                // meta row (timestamp + delete button)
+                const metaRow = document.createElement('div');
+                metaRow.className = 'blog-meta';
+                
+                const timeSpan = document.createElement('span');
+                timeSpan.className = 'timestamp';
+                timeSpan.textContent = post.timestamp || 'just now';
+                
+                const delBtn = document.createElement('button');
+                delBtn.className = 'delete-btn';
+                delBtn.textContent = '✕ DELETE';
+                delBtn.setAttribute('data-id', post.id);
+                delBtn.setAttribute('aria-label', 'delete blog post');
+                
+                metaRow.appendChild(timeSpan);
+                metaRow.appendChild(delBtn);
+                
+                card.appendChild(titleEl);
+                card.appendChild(contentEl);
+                card.appendChild(metaRow);
+                
+                feedContainer.appendChild(card);
+            }
+        }
+        
+        // ---------- add new blog post ----------
+        function addNewPost() {
+            let rawTitle = titleInput.value;
+            let rawContent = contentInput.value;
+            
+            // trim spaces
+            const trimmedTitle = rawTitle ? rawTitle.trim() : '';
+            const trimmedContent = rawContent ? rawContent.trim() : '';
+            
+            // edge case: both empty -> alert minimal feedback
+            if (trimmedTitle === '' && trimmedContent === '') {
+                alert('⛔ please write a title or some content before publishing.');
+                return;
+            }
+            
+            // set default if needed but still informative
+            const finalTitle = trimmedTitle === '' ? 'untitled note' : trimmedTitle;
+            const finalContent = trimmedContent === '' ? '— no content written —' : trimmedContent;
+            
+            const newPost = {
+                id: Date.now() + '_' + Math.random().toString(36).substring(2, 8),
+                title: finalTitle,
+                content: finalContent,
+                timestamp: new Date().toLocaleString(),
+            };
+            
+            posts.unshift(newPost);   // newest first
+            persistPosts();
+            renderFeed();
+            
+            // clear form fields for next writing session
+            titleInput.value = '';
+            contentInput.value = '';
+            // optional: subtle focus on title again
+            titleInput.focus();
+        }
+        
+        // ---------- delete single post by id (event delegation handled) ----------
+        function deletePostById(postId) {
+            const initialLength = posts.length;
+            posts = posts.filter(post => post.id !== postId);
+            if (posts.length !== initialLength) {
+                persistPosts();
+                renderFeed();
+            }
+        }
+        
+        // ---------- clear all posts (with confirm) ----------
+        function clearAllPosts() {
+            if (posts.length === 0) return;
+            const userConfirmed = confirm('⚠️ delete ALL blog posts? this action cannot be undone.');
+            if (userConfirmed) {
+                posts = [];
+                persistPosts();
+                renderFeed();
+            }
+        }
+        
+        // ---------- event delegation for delete buttons (dynamic) ----------
+        function setupDelegation() {
+            if (!feedContainer) return;
+            feedContainer.addEventListener('click', (e) => {
+                const deleteButton = e.target.closest('.delete-btn');
+                if (deleteButton && deleteButton.getAttribute('data-id')) {
+                    const id = deleteButton.getAttribute('data-id');
+                    deletePostById(id);
+                }
+            });
+        }
+        
+        // ---------- publish button click handler ----------
+        function initEventListeners() {
+            if (publishBtn) {
+                publishBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    addNewPost();
+                });
+            }
+            if (clearAllBtn) {
+                clearAllBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    clearAllPosts();
+                });
+            }
+            // optional: allow enter (ctrl+enter) in textarea to publish quickly but minimal not overkill
+            // but we add a nice micro interaction: ctrl+enter on textarea -> publish
+            if (contentInput) {
+                contentInput.addEventListener('keydown', (e) => {
+                    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+                        e.preventDefault();
+                        addNewPost();
+                    }
+                });
+            }
+            // also if focus title and press enter, don't submit weirdly, but it's fine.
+            titleInput?.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    if (contentInput) contentInput.focus();
+                }
+            });
+        }
+        
+        // ---------- initial load & rendering ----------
+        function init() {
+            loadPostsFromStorage();   // fills posts array from storage or demo posts
+            renderFeed();
+            setupDelegation();
+            initEventListeners();
+        }
+        
+        // run everything
+        init();
+    })();
 </script>
 </body>
 </html>
